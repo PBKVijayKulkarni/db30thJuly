@@ -1,0 +1,31 @@
+Single Application
+
+public class EmailService 
+	{
+		public void sendEmail(String message, String receiver){
+			//logic to send email
+			System.out.println("Email sent to "+receiver+ " with Message="+message);
+		}
+	}
+
+
+public class MyApplication
+{
+		private EmailService email = new EmailService();
+		
+		public void processMessages(String msg, String rec){
+			//do some msg validation, manipulation logic etc
+			this.email.sendEmail(msg, rec);
+	}
+}
+
+
+
+public class MyLegacyTest 
+{
+	public static void main(String[] args) 
+	{
+		MyApplication app = new MyApplication();
+		app.processMessages("Hi Pankaj", "pankaj@abc.com");
+	}
+}
