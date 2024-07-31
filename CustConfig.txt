@@ -1,0 +1,40 @@
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.p1.model.Account;
+import com.p1.model.Contact;
+import com.p1.model.Customer;
+
+@Configuration
+public class CustomerConfig1 
+{
+     @Bean
+     public Account createAccount()
+     {
+    	 Account acc1= new Account();
+    	 acc1.setAcc_num("icici1001");
+    	 acc1.setIfsc("ICICIPUNE01");
+    	 return acc1;
+     }
+     
+     @Bean
+     public Contact createContact()
+     {
+    	 Contact con1= new Contact();
+    	 con1.setCity("Pune");
+    	 con1.setEmail("vikas@gmail.com");
+    	 con1.setMob("9880378739");
+    	 return con1;
+     }
+     
+     @Bean(name="cust1")
+      public Customer createCustomer()
+      {
+    	 Customer cust= new Customer();
+    	 cust.setId(101);
+    	 cust.setCname("Vijay");
+    	 return cust;
+     }
+     
+}
