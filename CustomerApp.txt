@@ -1,0 +1,100 @@
+
+public class Customer 
+{
+    int  id;
+    String cname;
+    
+    @Autowired
+    Account acc_details;
+    
+    @Autowired
+    Contact c_details;
+
+	@Autowired
+	Address addr;
+
+    public  Customer()
+    { }
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	/*
+	 * public Account getAcc_details() { return acc_details; } public void
+	 * setAcc_details(Account acc_details) { this.acc_details = acc_details; }
+	 * public Contact getC_details() { return c_details; } public void
+	 * setC_details(Contact c_details) { this.c_details = c_details; }
+	 */
+	@Override
+	public String toString() {
+		return "Customer Details " + id +"  " + cname + " " + acc_details + " " + c_details ;
+	}
+    
+}
+
+public class Contact 
+{
+  String city;
+  String mob;
+  String email;
+  public Contact()
+  { }
+public String getCity() {
+	return city;
+}
+public void setCity(String city) {
+	this.city = city;
+}
+public String getMob() {
+	return mob;
+}
+public void setMob(String mob) {
+	this.mob = mob;
+}
+public String getEmail() {
+	return email;
+}
+public void setEmail(String email) {
+	this.email = email;
+}
+@Override
+public String toString() {
+	return "Contact Details " + city +"  "+ mob +" "+ email ;
+}
+}
+
+
+ublic class Account 
+{
+     String acc_num;
+     String ifsc;
+     public Account()
+     { }
+	public String getAcc_num() {
+		return acc_num;
+	}
+	public void setAcc_num(String acc_num) {
+		this.acc_num = acc_num;
+	}
+	public String getIfsc() {
+		return ifsc;
+	}
+	public void setIfsc(String ifsc) {
+		this.ifsc = ifsc;
+	}
+	@Override
+	public String toString() {
+		return "Account Details " + acc_num +  ifsc ;
+	}
+     
+}
+
