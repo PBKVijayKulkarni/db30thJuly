@@ -1,0 +1,129 @@
+
+public class Emp
+{
+   int id;
+   String ename;
+   double esal;
+   public Emp()
+   { }
+public Emp(int id, String ename, double esal) 
+{
+	this.id = id;
+	this.ename = ename;
+	this.esal = esal;
+}
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getEname() {
+	return ename;
+}
+public void setEname(String ename) {
+	this.ename = ename;
+}
+public double getEsal() {
+	return esal;
+}
+public void setEsal(double esal) {
+	this.esal = esal;
+}
+@Override
+public String toString() {
+	return "Id=" + id + ", Name=" + ename + ", Salary=" + esal;
+}
+}
+
+
+package com.pkg.p1;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class EmpList 
+{
+    LinkedList<Emp> emplist;
+    public EmpList()
+    { }
+	public EmpList(LinkedList<Emp> emplist) 
+	{	this.emplist = emplist;
+	  }
+	public LinkedList<Emp> getEmplist() {
+		return emplist;
+	}
+	public void setEmplist(LinkedList<Emp> emplist) {
+		this.emplist = emplist;
+	}
+	
+    public void displayList()
+    {	//System.out.println(emplist);
+        Iterator<Emp> it= emplist.iterator();
+        while(it.hasNext())
+        {  	Emp eobj=  (Emp) it.next();
+        	System.out.println(eobj.id+"  "+eobj.ename+"  "+eobj.esal);
+        }
+    }
+}
+
+
+package com.pkg.p1;
+
+import java.util.LinkedList;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class EmpCfg 
+{
+	@Bean(name="elist1")
+	public EmpList  getEmpList()
+	{
+		LinkedList<Emp> emplist= new LinkedList<Emp>();
+		emplist.add(new Emp(101, "Bulbul", 25000.00));
+		emplist.add(new Emp(102, "Riaz", 35000.00));
+		emplist.add(new Emp(103, "John", 65000.00));
+		emplist.add(new Emp(104, "Manisha", 15000.00));
+		emplist.add(new Emp(105, "Laxmi", 35000.00));
+		EmpList elist1= new EmpList(emplist);
+		return elist1;
+	}
+
+	@Bean(name="elist2")
+	public EmpList  retEmpList()
+	{
+		EmpList elist2= new EmpList();
+		LinkedList<Emp> emplist= new LinkedList<Emp>();
+		emplist.add(new Emp(201, "Chandra", 55000.00));
+		emplist.add(new Emp(202, "Dany", 25000.00));
+		emplist.add(new Emp(203, "Abraham", 35000.00));
+		emplist.add(new Emp(204, "Koirala", 25000.00));
+		emplist.add(new Emp(205, "Padma", 25000.00));
+		elist2.setEmplist(emplist);
+		return elist2;
+	}
+}
+
+
+package com.pkg.p1;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+       ApplicationContext apctx= new AnnotationConfigApplicationContext(EmpCfg.class);
+       EmpList el1= (EmpList) apctx.getBean("elist1");
+       el1.displayList();
+       EmpList el2= (EmpList) apctx.getBean("elist2");
+       el2.displayList();
+       ((AbstractApplicationContext) apctx).close();   
+    }
+}
+
+
