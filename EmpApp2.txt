@@ -1,0 +1,110 @@
+
+public class Emp1 
+{
+  int id;
+  String ename;
+  public Emp1()
+  { }
+  public Emp1(int id, String ename) 
+  {
+	this.id = id;
+	this.ename = ename;
+  }
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getEname() {
+	return ename;
+}
+public void setEname(String ename) {
+	this.ename = ename;
+}
+  
+}
+
+
+
+public class Emp2 extends Emp1
+{
+   String  month;
+   double amt;
+   public Emp2()
+   {super(); }
+   
+public Emp2(int id, String ename, String month, double amt) 
+{
+	super(id, ename);
+	this.month = month;
+	this.amt = amt;
+}
+
+public String getMonth() {
+	return month;
+}
+
+public void setMonth(String month) {
+	this.month = month;
+}
+
+public double getAmt() {
+	return amt;
+}
+
+public void setAmt(double amt) {
+	this.amt = amt;
+}
+
+@Override
+public String toString() {
+	return "Id="+getId()+", "+"Name="+getEname()+", "+"Month=" + month + ", Amount=" + amt ;
+}
+  
+}
+
+
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class EmpConfig 
+{
+   @Bean(name="eobj1")
+   public Emp2 constEmp()
+   {  Emp2 eobj1= new Emp2(101, "Akash", "December", 25000.00);
+	   return eobj1;
+     }
+   
+   @Bean(name="eobj2")
+   public Emp2 setEmp()
+   {
+	   Emp2 eobj2= new Emp2();
+	   eobj2.setId(202);
+	   eobj2.setEname("Bahubali");
+	   eobj2.setMonth("November");
+	   eobj2.setAmt(35000.00);
+	   return eobj2;
+   }
+}
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+      ApplicationContext apctx= new AnnotationConfigApplicationContext(EmpConfig.class);
+      Emp2 eobj1= (Emp2) apctx.getBean("eobj1");
+      System.out.println(eobj1);
+      Emp2 eobj2= (Emp2) apctx.getBean("eobj2");
+      System.out.println(eobj2);
+      ((AbstractApplicationContext) apctx).close();
+    }
+}
+
