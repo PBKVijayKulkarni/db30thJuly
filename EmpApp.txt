@@ -1,0 +1,109 @@
+
+public class Emp 
+{
+  int id;
+  String ename;
+  double esal;
+  
+  public Emp()
+  { }
+
+public Emp(int id, String ename, double esal) 
+{
+	this.id = id;
+	this.ename = ename;
+	this.esal = esal;
+}
+
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
+public String getEname() {
+	return ename;
+}
+
+public void setEname(String ename) {
+	this.ename = ename;
+}
+
+public double getEsal() {
+	return esal;
+}
+
+public void setEsal(double esal) {
+	this.esal = esal;
+}
+
+@Override
+public String toString() {
+	return "Id=" + id + ", Name=" + ename + ", Salary=" + esal ;
+}
+ 
+}
+
+
+
+import java.util.Scanner;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class EmpConfig 
+{
+   @Bean(name="eobj1")
+   public Emp constEmp()
+   {
+	   Emp eobj1= new Emp(1001, "Jay", 25000.00);
+	   return eobj1;
+   }
+   
+   @Bean(name="eobj2")
+   public Emp setEmp()
+   {
+	   Emp eobj2= new Emp();
+	   eobj2.setId(2002);
+	   eobj2.setEname("Ajay");
+	   eobj2.setEsal(30000.00);
+	   return eobj2;
+   }
+   
+   @Bean(name="eobj3")
+   public Emp inputEmp()
+   {
+	   Emp eobj3= new Emp();
+	   Scanner sc= new Scanner(System.in);
+	   System.out.println("Enter the Employee id, name and salary");
+	   eobj3.setId( sc.nextInt());
+	   eobj3.setEname(sc.next());
+	   eobj3.setEsal(sc.nextDouble());
+	   sc.close();
+	   return eobj3;
+   }
+}
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+      ApplicationContext apctx= 
+    		  new AnnotationConfigApplicationContext(EmpConfig.class);
+      Emp eobj1= (Emp) apctx.getBean("eobj1");
+      System.out.println(eobj1);
+      Emp eobj2= (Emp) apctx.getBean("eobj2");
+      System.out.println(eobj2);
+      Emp eobj3= (Emp) apctx.getBean("eobj3");
+      System.out.println(eobj3);
+      ((AbstractApplicationContext) apctx).close();
+    }
+}
