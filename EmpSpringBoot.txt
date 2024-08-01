@@ -1,0 +1,65 @@
+public class Emp {
+    int id;
+    String ename;
+    double esal;
+    public Emp()
+    { }
+    public Emp(int id, String ename, double esal)
+    {
+        this.id = id;
+        this.ename = ename;
+        this.esal = esal;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getEname() {
+        return ename;
+    }
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+    public double getEsal() {
+        return esal;
+    }
+    public void setEsal(double esal) {
+        this.esal = esal;
+    }
+    @Override
+    public String toString() {
+        return "Id=" + id + ", Name=" + ename + ", Salary=" + esal;
+    }
+
+}
+
+
+
+package com.p1.controller;
+
+import com.p1.model.Emp;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+
+@RestController
+
+public class EmpController
+{
+    @GetMapping("allEmps")
+    public ArrayList<Emp> allEmps()
+    {
+       ArrayList<Emp> emps = new ArrayList<>();
+       emps.add(new Emp(1, "John Doe", 25000.00));
+       emps.add(new Emp(2, "Akash", 15000.00));
+       emps.add(new Emp(3, "Kapil", 20000.00));
+       emps.add(new Emp(4, "Janhavi", 25000.00));
+       emps.add(new Emp(5, "Birju", 35000.00));
+       emps.add(new Emp(6, "Latha", 45000.00));
+       return emps;
+    }
+
+}
